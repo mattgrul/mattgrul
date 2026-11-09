@@ -29,7 +29,7 @@ Run the tests from `card/`:
 python3 -m unittest -v
 ```
 
-<!-- BEGIN shared from mattgrul/repo-template. Change it there. Write this repository's own text outside these lines. -->
+<!-- BEGIN shared text. Change it in the template repository. Write this repository's own text outside these lines. -->
 
 Every repository of this account has the rules below. A rule above
 them is this repository's own, and it wins when the two disagree.
@@ -46,16 +46,16 @@ Merge a pull request only after its required checks pass, with
 
 ## Shared Text
 
-The text between the `BEGIN shared from` and `END shared from` marker
+The text between the `BEGIN shared text` and `END shared text` marker
 lines is the same in every repository of this account. It is in
 `AGENTS.md`, in each file in `docs/agents/` and in
 `.github/dependabot.yml`.
 
 - Write text that only this repository needs outside the markers:
   above them in `AGENTS.md`, below them in the other files.
-- Change the shared text only in the template repository that the
-  markers name. In any other repository the next sync replaces the
-  change, so propose it in a pull request there.
+- Change the shared text only in the template repository. In any
+  other repository the next sync replaces the change, so propose it
+  to the account owner instead.
 - In the template repository, a change to the shared text reaches
   every repository at the next sync. Make it only when it holds true
   for all of them, and say so in the pull request. After the merge,
@@ -127,4 +127,4 @@ When a skill names a triage role, take its label from
 Before a skill explores the code or names a domain concept, read
 `docs/agents/domain.md`.
 
-<!-- END shared from mattgrul/repo-template -->
+<!-- END shared text -->
