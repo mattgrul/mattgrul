@@ -18,9 +18,9 @@ from itertools import groupby
 
 THEMES = {
     "dark": dict(frame="#292e42", fg="#c0caf5", dim="#565f89", key="#7aa2f7",
-                 head="#bb9af7", ok="#9ece6a", cyan="#7dcfff"),
+                 head="#bb9af7", ok="#9ece6a", page="#0d1117"),
     "light": dict(frame="#c4c8da", fg="#3760bf", dim="#848cb5", key="#2e7de9",
-                  head="#9854f1", ok="#587539", cyan="#007197"),
+                  head="#9854f1", ok="#587539", page="#ffffff"),
 }
 FONT = "ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"
 # portrait.py sizes the portrait for cells this wide and this high.
@@ -112,7 +112,7 @@ def info(days, today):
         leader("Tools.Infra", "OpenTofu, Docker, GitHub Actions, Chezmoi"),
         leader("Tools.Agents", "Claude Code, Codex, Grok"),
         [],
-        leader("Builds", "Dev Environments, Infra As Code, Agent Tooling"),
+        leader("Builds", "Anything Is Possible"),
         leader("Rule", "Everything Is Code"),
         [],
         rule("Contact"),
@@ -206,8 +206,9 @@ def svg(theme, picture, days, today):
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {height}" width="{w}" height="{height}" font-family="{FONT}">',
         f"<style>{STYLE}</style>",
-        f'<defs><linearGradient id="scan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{c["cyan"]}" stop-opacity="0"/>'
-        f'<stop offset=".5" stop-color="{c["cyan"]}" stop-opacity=".28"/><stop offset="1" stop-color="{c["cyan"]}" stop-opacity="0"/></linearGradient></defs>',
+        # The scan band is GitHub's page colour, so it reads as a shadow passing over the portrait.
+        f'<defs><linearGradient id="scan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{c["page"]}" stop-opacity="0"/>'
+        f'<stop offset=".5" stop-color="{c["page"]}" stop-opacity=".75"/><stop offset="1" stop-color="{c["page"]}" stop-opacity="0"/></linearGradient></defs>',
     ]
     out.append(f'<text class="type" x="{px}" y="16" font-size="14" xml:space="preserve">'
                f'<tspan fill="{c["ok"]}">❯</tspan><tspan fill="{c["fg"]}"> fastfetch --profile mattgrul</tspan></text>')
