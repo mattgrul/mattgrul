@@ -3,10 +3,8 @@
 
 ## Adding a Package Type
 
-Add an entry to `.github/dependabot.yml`. Put it after the line
-`# END shared from mattgrul/repo-template`, with one blank line before
-it. The text between the two marker lines is shared, and a sync from
-repo-template replaces it.
+Add an entry to `.github/dependabot.yml`. Put it after the
+`# END shared from` marker line, with one blank line before it.
 
 ```yaml
   - package-ecosystem: composer
