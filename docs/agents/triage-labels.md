@@ -1,4 +1,4 @@
-<!-- BEGIN shared from mattgrul/repo-template. Change it there. Write this repository's own text outside these lines. -->
+<!-- BEGIN shared text. Change it in the template repository. Write this repository's own text outside these lines. -->
 # Triage Labels
 
 The skills name seven triage roles: two category roles and five state
@@ -14,4 +14,4 @@ issue tracker.
 | `ready-for-agent` | Fully specified, ready for an AFK agent          |
 | `ready-for-human` | Requires human implementation                    |
 | `wontfix`         | Will not be actioned                             |
-<!-- END shared from mattgrul/repo-template -->
+<!-- END shared text -->

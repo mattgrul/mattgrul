@@ -1,4 +1,4 @@
-# BEGIN shared from mattgrul/repo-template. Change it there. Write this repository's own text outside these lines.
+# BEGIN shared text. Change it in the template repository. Write this repository's own text outside these lines.
 # Keep the dependencies current. Add an entry for each other kind of
 # package, if the repository uses one.
 version: 2
@@ -26,4 +26,4 @@ updates:
       # Dependabot adds an ecosystem label by default. This list replaces
       # it, so each pull request gets only this label.
       - dependencies
-# END shared from mattgrul/repo-template
+# END shared text

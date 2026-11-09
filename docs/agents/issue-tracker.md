@@ -1,4 +1,4 @@
-<!-- BEGIN shared from mattgrul/repo-template. Change it there. Write this repository's own text outside these lines. -->
+<!-- BEGIN shared text. Change it in the template repository. Write this repository's own text outside these lines. -->
 # Issue tracker: GitHub
 
 Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all operations.
@@ -45,4 +45,4 @@ Used by `/wayfinder`. The **map** is a single issue with **child** issues as tic
 - **Frontier query**: list the map's open children (`gh issue list --state open`, scoped to the map's sub-issues / task list), drop any with an open blocker (`issue_dependencies_summary.blocked_by > 0`, or an open issue in the `Blocked by` line) or an assignee; first in map order wins.
 - **Claim**: `gh issue edit <n> --add-assignee @me`, the session's first write.
 - **Resolve**: `gh issue comment <n> --body "<answer>"`, then `gh issue close <n>`, then append a context pointer (gist + link) to the map's Decisions-so-far.
-<!-- END shared from mattgrul/repo-template -->
+<!-- END shared text -->
