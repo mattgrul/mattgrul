@@ -1,0 +1,22 @@
+# The required check "gitleaks-scan": no secret and no personal data in
+# the files or the new commits. The scan and its rules live in
+# mattgrul/.github, so a change there reaches every repository through a
+# Dependabot pull request.
+name: gitleaks-scan
+
+on:
+  pull_request:
+  push:
+    branches: [main, "*.x"]
+
+permissions:
+  contents: read
+
+jobs:
+  gitleaks-scan:
+    # The scan runs in its own Docker image, so the Ubuntu version of
+    # the runner does not change the result.
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: mattgrul/.github/gitleaks-scan@1e949a98e36c89cc7cc6ba01f489179f3cd31cc4 # v4.0.1

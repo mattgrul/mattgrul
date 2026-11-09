@@ -1,0 +1,27 @@
+# Keep the dependencies current. Add an entry for each other kind of
+# package, if the repository uses one.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: / # covers .github/workflows
+    schedule:
+      # Every day, weekends too, at 06:00 UTC. daily runs on weekdays only.
+      interval: cron
+      cronjob: "0 6 * * *"
+    cooldown:
+      default-days: 7
+      exclude:
+        - mattgrul/*
+    groups:
+      # Minor and patch updates share one pull request. A major update can
+      # break a caller, so it gets its own.
+      github-actions:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    labels:
+      # Dependabot adds an ecosystem label by default. This list replaces
+      # it, so each pull request gets only this label.
+      - dependencies

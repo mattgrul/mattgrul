@@ -1,0 +1,27 @@
+# Draft a release through the shared workflow. Run it from the Actions
+# tab and choose the part of the version to raise. Publish the draft to
+# create the tag.
+#
+# The release steps live in mattgrul/.github. This file only calls them,
+# by path and commit SHA, and GitHub reads them from there on each run.
+# A change there reaches every repository through a Dependabot pull
+# request that moves the SHA.
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "The part of the version to raise."
+        type: choice
+        options: [patch, minor, major]
+
+jobs:
+  release:
+    uses: mattgrul/.github/.github/workflows/release.yml@1e949a98e36c89cc7cc6ba01f489179f3cd31cc4 # v4.0.1
+    # The shared workflow gets no more than this job grants, and the
+    # default token is read only.
+    permissions:
+      contents: write
+    with:
+      bump: ${{ inputs.bump }}
