@@ -112,7 +112,7 @@ def info(days, today):
         leader("Tools.Infra", "OpenTofu, Docker, GitHub Actions, Chezmoi"),
         leader("Tools.Agents", "Claude Code, Codex, Grok"),
         [],
-        leader("Builds", "Dev Environments, Infra As Code, Agent Tooling"),
+        leader("Builds", "Anything Is Possible"),
         leader("Rule", "Everything Is Code"),
         [],
         rule("Contact"),
