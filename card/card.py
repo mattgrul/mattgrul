@@ -17,10 +17,10 @@ from html import escape
 from itertools import groupby
 
 THEMES = {
-    "dark": dict(bg="#1a1b26", frame="#292e42", fg="#c0caf5", dim="#565f89", key="#7aa2f7",
-                 head="#bb9af7", ok="#9ece6a", warm="#ff9e64", cyan="#7dcfff", red="#f7768e"),
-    "light": dict(bg="#e1e2e7", frame="#c4c8da", fg="#3760bf", dim="#848cb5", key="#2e7de9",
-                  head="#9854f1", ok="#587539", warm="#b15c00", cyan="#007197", red="#f52a65"),
+    "dark": dict(frame="#292e42", fg="#c0caf5", dim="#565f89", key="#7aa2f7",
+                 head="#bb9af7", ok="#9ece6a", cyan="#7dcfff"),
+    "light": dict(frame="#c4c8da", fg="#3760bf", dim="#848cb5", key="#2e7de9",
+                  head="#9854f1", ok="#587539", cyan="#007197"),
 }
 FONT = "ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"
 # portrait.py sizes the portrait for cells this wide and this high.
@@ -195,23 +195,21 @@ def svg(theme, picture, days, today):
     c = THEMES[theme]
     cells, eyes = picture["cells"], picture["eyes"]
     rng = random.Random(7)
-    px, py = 32, 78
-    ix, ilh = 452, 18.6
+    # No window frame or background: the card sits straight inside the
+    # README box that GitHub draws, on GitHub's own page colour.
+    px, py = 8, 50
+    ix, ilh = 428, 18.6
     lines = info(days, today)
     cols = len(cells[0])
-    height = int(max(py + len(cells) * LINE_H, py + len(lines) * ilh) + 56)
-    w = 1080
+    height = int(max(py + len(cells) * LINE_H, py + len(lines) * ilh) + 30)
+    w = 1036
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {height}" width="{w}" height="{height}" font-family="{FONT}">',
         f"<style>{STYLE}</style>",
         f'<defs><linearGradient id="scan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{c["cyan"]}" stop-opacity="0"/>'
         f'<stop offset=".5" stop-color="{c["cyan"]}" stop-opacity=".28"/><stop offset="1" stop-color="{c["cyan"]}" stop-opacity="0"/></linearGradient></defs>',
-        f'<rect x="1" y="1" width="{w-2}" height="{height-2}" rx="12" fill="{c["bg"]}" stroke="{c["frame"]}" stroke-width="2"/>',
     ]
-    for i, col in enumerate((c["red"], c["warm"], c["ok"])):
-        out.append(f'<circle cx="{26 + i * 20}" cy="24" r="6" fill="{col}"/>')
-    out.append(f'<text x="{w/2}" y="29" text-anchor="middle" font-size="13" fill="{c["dim"]}">matt@walsh: ~</text>')
-    out.append(f'<text class="type" x="{px}" y="58" font-size="14" xml:space="preserve">'
+    out.append(f'<text class="type" x="{px}" y="16" font-size="14" xml:space="preserve">'
                f'<tspan fill="{c["ok"]}">❯</tspan><tspan fill="{c["fg"]}"> fastfetch --profile mattgrul</tspan></text>')
 
     t0 = 1.3
@@ -247,7 +245,7 @@ def svg(theme, picture, days, today):
 
     end = t1 + len(lines) * 0.06 + DECODE_FRAMES * DECODE_STEP + 0.2
     said = f'<tspan fill="{c["fg"]}"> {escape(LIGHT_ONLY)}</tspan>' if theme == "light" else ""
-    out.append(f'<text class="a" style="animation-delay:{end:.2f}s" x="{px}" y="{height - 24}" font-size="14" xml:space="preserve">'
+    out.append(f'<text class="a" style="animation-delay:{end:.2f}s" x="{px}" y="{height - 6}" font-size="14" xml:space="preserve">'
                f'<tspan fill="{c["ok"]}">❯</tspan>{said}<tspan fill="{c["fg"]}"> </tspan>'
                f'<tspan class="cur" fill="{c["key"]}">█</tspan></text>')
     out.append("</svg>")
