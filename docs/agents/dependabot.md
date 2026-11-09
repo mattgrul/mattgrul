@@ -3,8 +3,10 @@
 
 ## Adding a Package Type
 
-Add an entry to `.github/dependabot.yml`. Put it after the last entry,
-with one blank line before it:
+Add an entry to `.github/dependabot.yml`. Put it after the line
+`# END shared from mattgrul/repo-template`, with one blank line before
+it. The text between the two marker lines is shared, and a sync from
+repo-template replaces it.
 
 ```yaml
   - package-ecosystem: composer
@@ -29,6 +31,6 @@ Replace `composer` with the ecosystem name, in both places.
 ## `N.x` Branches
 
 To keep an `N.x` branch such as `1.x` current, add a copy of each
-entry with `target-branch: 1.x`. Delete those copies when the branch
-gets no more fixes.
+entry with `target-branch: 1.x`, after the END line. Delete those
+copies when the branch gets no more fixes.
 <!-- END shared from mattgrul/repo-template -->
