@@ -43,7 +43,32 @@ write the title as the change, in one sentence.
 
 Merge a pull request only after its required checks pass, with
 `gitleaks-scan` among them. When a required check fails, fix the cause.
-Merging past it with `--admin` is the account owner's choice alone.
+
+## Shared Text
+
+The text between the `BEGIN shared from` and `END shared from` marker
+lines is the same in every repository of this account. It is in
+`AGENTS.md`, in each file in `docs/agents/` and in
+`.github/dependabot.yml`.
+
+- Write text that only this repository needs outside the markers:
+  above them in `AGENTS.md`, below them in the other files.
+- Change the shared text only in the template repository that the
+  markers name. In any other repository the next sync replaces the
+  change, so propose it in a pull request there.
+- In the template repository, a change to the shared text reaches
+  every repository at the next sync. Make it only when it holds true
+  for all of them, and say so in the pull request. After the merge,
+  the account owner runs the sync.
+
+## Public Text
+
+Public repositories carry the shared text. Each new repository also
+starts with a copy of every file in the template repository. A later
+commit cannot take text out of that history. So in the shared text and
+in the template, name no private repository and no person, and give no
+detail of a check or a setting that shows a way past it. Name a public
+repository only where a file or its reader needs the name.
 
 ## Gitleaks Scan
 
@@ -65,8 +90,8 @@ Pin each action to a full commit SHA, with its version in a comment on
 the same line. GitHub refuses a workflow that names an action by tag.
 Dependabot moves the SHAs.
 
-The steps of the scan and the release workflow live in
-`mattgrul/.github`. A repository that calls them changes them there.
+The steps of the scan and the release workflow live in the repository
+that the workflows call. Change them there.
 
 ## Dependabot
 
@@ -81,8 +106,9 @@ required checks pass. Until then, check it by hand before you merge it.
 
 Draft a release with the Release workflow:
 `gh workflow run release.yml -f bump=<patch|minor|major>`. It raises
-that part of the highest `vX.Y.Z` tag. The account owner publishes
-the draft, and publishing creates the tag.
+that part of the highest `vX.Y.Z` tag. On an `N.x` branch it raises
+the highest `vN.Y.Z` tag, and it refuses `major`. The account owner
+publishes the draft, and publishing creates the tag.
 
 ## Agent skills
 
