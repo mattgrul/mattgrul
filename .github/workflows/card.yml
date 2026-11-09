@@ -1,0 +1,70 @@
+# Draw the profile card each night, and on each merge to main, so the
+# uptime and the contribution stats stay current. The portrait does not
+# change here: it comes from card/portrait.json.
+#
+# The ruleset refuses a push to main, so the card goes to the branch
+# "output" instead. The ruleset does not cover it. Each run replaces the
+# branch with one commit, so its history does not grow.
+name: card
+
+on:
+  schedule:
+    - cron: "23 4 * * *"
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency: card
+
+jobs:
+  card:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write # push the output branch
+      actions: write # enable this workflow again
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # The profile counts private contributions, so the public calendar
+      # holds them as plain numbers, with no repository named.
+      - name: Read the contribution calendar
+        run: |
+          # shellcheck disable=SC2016 # $login is a GraphQL variable, not a shell one
+          gh api graphql -F login="$GITHUB_REPOSITORY_OWNER" -f query='
+            query($login: String!) {
+              user(login: $login) {
+                contributionsCollection {
+                  contributionCalendar { weeks { contributionDays { date contributionCount } } }
+                }
+              }
+            }' --jq '[.data.user.contributionsCollection.contributionCalendar.weeks[].contributionDays[]]' \
+            > "$RUNNER_TEMP/calendar.json"
+
+      - name: Draw the card
+        run: python3 card/card.py card/portrait.json "$RUNNER_TEMP/calendar.json" "$RUNNER_TEMP"
+
+      - name: Push the card to the output branch
+        env:
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com # gitleaks:allow
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com # gitleaks:allow
+        run: |
+          git switch --orphan output
+          cp "$RUNNER_TEMP"/card-dark.svg "$RUNNER_TEMP"/card-light.svg .
+          git add card-dark.svg card-light.svg
+          git commit -q -m "Draw the card"
+          git push -qf origin output
+
+      # GitHub turns off a schedule after 60 days without activity in a
+      # public repository. It does not say whether the push above counts,
+      # so enable the workflow again, which keep-alive tools use to reset
+      # that count. The docs do not promise that it does.
+      - name: Keep the schedule on
+        run: gh workflow enable card.yml --repo "$GITHUB_REPOSITORY"

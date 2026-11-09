@@ -1,5 +1,34 @@
 # Agent instructions
 
+This repository holds the profile README of `mattgrul`. GitHub shows
+`README.md` on the profile page, so keep the README to the card alone.
+Put notes for people who change the repository here.
+
+## The card
+
+The README shows `card-dark.svg` or `card-light.svg` from the branch
+`output`, chosen by the visitor's theme.
+
+- `card/card.py` draws both cards. It needs only the standard library.
+- `card/portrait.json` holds the ASCII portrait. `card/portrait.py`
+  makes it from the profile picture. Its header says how to run it.
+- `.github/workflows/card.yml` draws the cards each night and on each
+  merge to `main`, and pushes them to `output`. Its header says why.
+
+To change the text on the card, edit `info()` in `card/card.py` and
+open a pull request. The merge draws the card again.
+
+To change the portrait, run `card/portrait.py` on the new picture.
+Render the card and check the hair and the blink before you open the
+pull request, because the crop, the masks and the eye cells are tuned
+to the current photo.
+
+Run the tests from `card/`:
+
+```bash
+python3 -m unittest -v
+```
+
 <!-- BEGIN shared from mattgrul/repo-template. Change it there. Write this repository's own text outside these lines. -->
 
 Every repository of this account has the rules below. A rule above
