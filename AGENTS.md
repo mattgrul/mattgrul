@@ -110,6 +110,11 @@ that part of the highest `vX.Y.Z` tag. On an `N.x` branch it raises
 the highest `vN.Y.Z` tag, and it refuses `major`. The account owner
 publishes the draft, and publishing creates the tag.
 
+GitHub writes the notes of a draft from the pull requests merged since
+the release before it. On an `N.x` branch that is the last `vN.Y.Z`
+release, not the newest release of the repository. So the workflow
+gives GitHub no start tag.
+
 ## Agent skills
 
 ### Issue tracker
