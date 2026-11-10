@@ -41,8 +41,9 @@ each `N.x` branch, so do not push to them. A pull request merges by
 squash only, and the squash commit takes the pull request title, so
 write the title as the change, in one sentence.
 
-Merge a pull request only after its required checks pass, with
-`gitleaks-scan` among them. When a required check fails, fix the cause.
+Merge a pull request only after every check on it passes, not only
+the required ones. The ruleset requires `gitleaks-scan` in every
+repository. When a check fails, fix the cause.
 
 ## Shared Text
 
@@ -100,7 +101,7 @@ repository adds a package type, such as Composer, npm or Go modules,
 or when an `N.x` branch starts or stops getting fixes.
 
 Once CI tests the project, merge a dependency pull request when its
-required checks pass. Until then, check it by hand before you merge it.
+checks pass. Until then, check it by hand before you merge it.
 
 ## Releases
 
