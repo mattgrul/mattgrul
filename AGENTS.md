@@ -106,14 +106,10 @@ required checks pass. Until then, check it by hand before you merge it.
 
 Draft a release with the Release workflow:
 `gh workflow run release.yml -f bump=<patch|minor|major>`. It raises
-that part of the highest `vX.Y.Z` tag. On an `N.x` branch it raises
-the highest `vN.Y.Z` tag, and it refuses `major`. The account owner
-publishes the draft, and publishing creates the tag.
-
-GitHub writes the notes of a draft from the pull requests merged since
-the release before it. On an `N.x` branch that is the last `vN.Y.Z`
-release, not the newest release of the repository. So the workflow
-gives GitHub no start tag.
+that part of the highest `vX.Y.Z` tag. To release from an `N.x`
+branch, add `--ref N.x`. The workflow then raises the highest
+`vN.Y.Z` tag, and it refuses `major`. The account owner publishes the
+draft, and publishing creates the tag.
 
 ## Agent skills
 
