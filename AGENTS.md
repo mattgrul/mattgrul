@@ -85,6 +85,34 @@ commit messages.
 - Add a `.gitleaks.toml` only when the shared scan rules cannot work.
   It replaces all of them.
 
+## Checks
+
+Run the checks of the repository's own code, such as its tests and
+its linters, in `.github/workflows/checks.yml`. Name the workflow
+`checks`. Keep the scan in its own workflow. A repository with no
+checks of its own has no `checks` workflow.
+
+- Name the required job `checks`. The ruleset requires a check of
+  that name in each repository that has the workflow, and GitHub
+  names a check after its job. Do not rename the job, because the
+  ruleset then waits for a check that never reports.
+- When the checks need more than one job, make `checks` the last job.
+  It waits for the others and fails when one of them fails, so the
+  ruleset requires one name only:
+
+  ```yaml
+  checks:
+    needs: [lint, unit]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        run: exit 1
+  ```
+
+  Keep `if: always()`. Without it, a failed job does not fail
+  `checks`.
+
 ## Actions
 
 Pin each action to a full commit SHA, with its version in a comment on
