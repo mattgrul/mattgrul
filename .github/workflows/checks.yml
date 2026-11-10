@@ -1,6 +1,6 @@
-# The required check "test": the card generator's tests. They need only
+# The required check "checks": the card generator's tests. They need only
 # the standard library, so the runner's own Python runs them.
-name: test
+name: checks
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  checks:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
