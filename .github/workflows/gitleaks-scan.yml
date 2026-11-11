@@ -19,4 +19,4 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: mattgrul/.github/gitleaks-scan@8376c7144f2a586ac170ea96b92168effb3a48b2 # v1.0.0
+      - uses: mattgrul/.github/gitleaks-scan@412e34e76fa77c7364d436122e8d9c63976f991f # v1.0.1

@@ -18,7 +18,7 @@ on:
 
 jobs:
   release:
-    uses: mattgrul/.github/.github/workflows/release.yml@8376c7144f2a586ac170ea96b92168effb3a48b2 # v1.0.0
+    uses: mattgrul/.github/.github/workflows/release.yml@412e34e76fa77c7364d436122e8d9c63976f991f # v1.0.1
     # The shared workflow gets no more than this job grants, and the
     # default token is read only.
     permissions:
