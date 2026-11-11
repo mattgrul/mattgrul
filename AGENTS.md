@@ -85,7 +85,7 @@ commit messages.
 - Add a `.gitleaks.toml` only when the shared scan rules cannot work.
   It replaces all of them.
 
-## Checks
+## Checks Workflow
 
 Run the checks of the repository's own code, such as its tests and
 its linters, in `.github/workflows/checks.yml`. Name the workflow
